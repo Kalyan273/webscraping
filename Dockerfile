@@ -1,6 +1,6 @@
 FROM maven:3.8.3-openjdk-17 AS build
 
-ADD . /webscraping
+ADD . /java-springboot
 WORKDIR /java-springboot
 
 # Just echo so we can see, if everything is there :)
@@ -27,7 +27,7 @@ VOLUME /tmp
 USER 10014
 
 # Add Spring Boot app.jar to Container
-COPY --from=build "/webscraping/target/*.jar" app.jar
+COPY --from=build "/java-springboot/target/*.jar" app.jar
 
 # Fire up our Spring Boot app by default
 CMD [ "sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /app.jar" ]

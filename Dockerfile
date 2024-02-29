@@ -1,11 +1,6 @@
-# Use an official OpenJDK runtime as a parent image
-FROM maven:3.8.3-openjdk-17 AS build
+FROM openjdk-17
+EXPOSE 8080
+ADD out/artifacts/webscraping_jar/webscraping.jar webscraping.jar
+ENTRYPOINT ["java","-jar","/webscraping.jar"]
 
-# Set the working directory inside the container
-WORKDIR /app
 
-# Copy the JAR file into the container at /app
-COPY out/artifacts/webscraping_jar/webscraping.jar /app/
-
-# Specify the command to run your application
-CMD ["java", "-jar", "webscraping.jar"]
